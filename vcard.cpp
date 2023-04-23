@@ -28,7 +28,7 @@ string Vcard::base64_encode(vector<unsigned char> in) {
     return out;
 }
 
-string Vcard::createVCF() {
+string Vcard::createVCF(bool QRCode) {
     // https://www.rfc-editor.org/rfc/rfc6350
     string vcf = BEGIN + "\n";
 
@@ -40,7 +40,7 @@ string Vcard::createVCF() {
     if (!email.empty()) vcf += email + "\n";
     if (!note.empty()) vcf += note + "\n";
     if (!org.empty()) vcf += org + "\n";
-    if (!photo.empty()) vcf += photo + "\n";
+    if (!photo.empty() && !QRCode) vcf += photo + "\n";
     if (!tel_home.empty()) vcf += tel_home + "\n";
     if (!tel_work.empty()) vcf += tel_work + "\n";
     if (!title.empty()) vcf += title + "\n";
@@ -321,9 +321,8 @@ vector<unsigned char> Vcard::readFile(string file_name) {
 
 bool Vcard::saveVCF(string file_name) {
     if (file_name.empty()) {
-        cout << "Ime datoteke ne sme biti prazno" << endl;
 
-        return false;
+        return true;
     }
     file_name = regex_replace(file_name, regex("/"), "//");
     ifstream ifile(file_name);

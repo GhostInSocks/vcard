@@ -1,5 +1,6 @@
 #include <iostream>
 #include "vcard.h"
+#include "qrcode.h"
 
 using namespace std;
 
@@ -160,7 +161,7 @@ bool saveCard(Vcard* card) {
     string file_name;
     bool ok;
 
-    cout << "Napisite polno ime datoteke, npr. C:/my_vcard.vcf: ";
+    cout << "Napisite polno ime datoteke, npr. C:/my_vcard.vcf ali pustite prazno: ";
     getline(cin, file_name);
     ok = card->saveVCF(file_name);
     if (!ok) {
@@ -171,8 +172,24 @@ bool saveCard(Vcard* card) {
     return ok;
 }
 
+bool savePNG(QRCode* png, Vcard* card) {
+    string file_name;
+    bool ok;
+
+    cout << "Napisite polno ime datoteke, npr. C:/my_qr.png ali pustite prazno: ";
+    getline(cin, file_name);
+    ok = png->savePNG(card->createVCF(true), file_name);
+    if (!ok) {
+        cout << "Datoteka ze obstaja ali napacno ime datoteke!" << endl;
+        savePNG(png, card);
+    }
+
+    return ok;
+}
+
 int main(){
     Vcard myvcard;
+    QRCode myQR;
 
     addPerson(&myvcard);
     addBday(&myvcard);
@@ -185,6 +202,7 @@ int main(){
     addUrl(&myvcard);
     addPhoto(&myvcard);
     saveCard(&myvcard);
+    savePNG(&myQR, &myvcard);
 
     return 0;
 }

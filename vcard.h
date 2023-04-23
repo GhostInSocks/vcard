@@ -58,7 +58,7 @@ private:
 
 public:
     Vcard();
-    string createVCF();
+    string createVCF(bool QRCode = false);
     void addPerson(string prefix, string given_name, string middle_name,
                    string last_name, string suffix);
     bool addBday(string bdate);
