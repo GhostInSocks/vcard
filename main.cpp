@@ -161,7 +161,7 @@ bool saveCard(Vcard* card) {
     string file_name;
     bool ok;
 
-    cout << "Napisite polno ime datoteke, npr. C:/my_vcard.vcf ali pustite prazno: ";
+    cout << "Napisite polno ime slike, npr. C:/my_vcard.vcf ali pustite prazno: ";
     getline(cin, file_name);
     ok = card->saveVCF(file_name);
     if (!ok) {

@@ -18,8 +18,10 @@ public:
 
 private:
     int size;
+    int round_size;
 
     uint32_t round_image_size(qrcodegen::QrCode &qr);
+    vector<uint8_t>& create_bitmap(qrcodegen::QrCode &qr, vector<uint8_t> &image_data, bool alpha = false);
 };
 
 #endif // QRCODE_H
