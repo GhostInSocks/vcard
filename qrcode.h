@@ -12,16 +12,17 @@ using namespace std;
 
 class QRCode {
 public:
-    QRCode(int image_size = 300);
+    QRCode() {};
 
-    bool savePNG(string text, string filename);
+    bool savePNG(string text, int size, string filename);
+    void showImage(string text, int size);
 
 private:
     int size;
-    int round_size;
+    int rounded_size;
 
     uint32_t round_image_size(qrcodegen::QrCode &qr);
-    vector<uint8_t>& create_bitmap(qrcodegen::QrCode &qr, vector<uint8_t> &image_data, bool alpha = false);
+    vector<uint8_t>& create_bitmap(string text, vector<uint8_t> &image_data, bool alpha = false);
 };
 
 #endif // QRCODE_H

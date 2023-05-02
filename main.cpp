@@ -161,7 +161,7 @@ bool saveCard(Vcard* card) {
     string file_name;
     bool ok;
 
-    cout << "Napisite polno ime slike, npr. C:/my_vcard.vcf ali pustite prazno: ";
+    cout << "Napisite polno ime datoteke, npr. C:/my_vcard.vcf ali pustite prazno: ";
     getline(cin, file_name);
     ok = card->saveVCF(file_name);
     if (!ok) {
@@ -176,9 +176,9 @@ bool savePNG(QRCode* png, Vcard* card) {
     string file_name;
     bool ok;
 
-    cout << "Napisite polno ime datoteke, npr. C:/my_qr.png ali pustite prazno: ";
+    cout << "Napisite polno ime slike, npr. C:/my_qr.png ali pustite prazno: ";
     getline(cin, file_name);
-    ok = png->savePNG(card->createVCF(true), file_name);
+    ok = png->savePNG(card->createVCF(true), 300, file_name);
     if (!ok) {
         cout << "Datoteka ze obstaja ali napacno ime datoteke!" << endl;
         savePNG(png, card);
@@ -203,6 +203,7 @@ int main(){
     addPhoto(&myvcard);
     saveCard(&myvcard);
     savePNG(&myQR, &myvcard);
+    myQR.showImage(myvcard.createVCF(true), 600);
 
     return 0;
 }
