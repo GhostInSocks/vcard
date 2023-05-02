@@ -178,7 +178,7 @@ bool savePNG(QRCode* png, Vcard* card) {
 
     cout << "Napisite polno ime slike, npr. C:/my_qr.png ali pustite prazno: ";
     getline(cin, file_name);
-    ok = png->savePNG(card->createVCF(true), 300, file_name);
+    ok = png->savePNG(card->createVCF(true), 600, file_name);
     if (!ok) {
         cout << "Datoteka ze obstaja ali napacno ime datoteke!" << endl;
         savePNG(png, card);
